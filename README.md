@@ -56,8 +56,35 @@ Commands can also be run from host machine using `docker-compose exec` command
 docker-compose -f kafka-docker-compose.yaml exec kafka-1 /opt/bitnami/kafka/bin/kafka-topics.sh --list --bootstrap-server host.docker.internal:9092
 ```
 
+## Kafka CLI Commands
+
 Create new topic with specified partitions and replication factor
 
 ```sh
 sh /path/to/directory/kafka-topics.sh --create -topic test-topic2 --partitions 3 --replication-factor 2 --bootstrap-server localhost:9092
+```
+
+List and describe topics
+
+```sh
+sh /path/to/directory/kafka-topics.sh --list --bootstrap-server localhost:9092
+sh /path/to/directory/kafka-topics.sh --describe --bootstrap-server localhost:9092
+```
+
+Delete a topic (permanently delete)
+
+```sh
+sh /path/to/directory/kafka-topics.sh --delete --topic topic1 --bootstrap-server localhost:9092
+```
+
+Send a message using Kafka CLI
+
+```sh
+sh /path/to/directory/kafka-console-producer.sh --bootstrap-server localhost:9092,localhost:9094 --topic test-topic2
+```
+
+Send key/value pair message using Kafka CLI
+
+```sh
+sh /path/to/directory/kafka-console-producer.sh --bootstrap-server localhost:9092,localhost:9094 --topic test-topic2 --property "parse.key=true" --property "key.separator=:"
 ```
