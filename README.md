@@ -79,12 +79,26 @@ sh /path/to/directory/kafka-topics.sh --delete --topic topic1 --bootstrap-server
 
 Send a message using Kafka CLI
 
+> NOTE: Messages sent without a key are given a `null` key value and distributed across all partitions using the round robin algorithm
+
 ```sh
 sh /path/to/directory/kafka-console-producer.sh --bootstrap-server localhost:9092,localhost:9094 --topic test-topic2
+
+# Send key/value pair message using Kafka CLI
+sh /path/to/directory/kafka-console-producer.sh --bootstrap-server localhost:9092,localhost:9094 --topic test-topic2 --property "parse.key=true" --property "key.separator=:"
 ```
 
-Send key/value pair message using Kafka CLI
+Consume messages using the Kafka CLI
+
+> NOTE: Messages consumed with same key value are read in order of receipt, messages with different keys are read in random order.
 
 ```sh
-sh /path/to/directory/kafka-console-producer.sh --bootstrap-server localhost:9092,localhost:9094 --topic test-topic2 --property "parse.key=true" --property "key.separator=:"
+# Start reading new messages
+sh /path/to/directory/kafka-console-consumer.sh --topic test-topic2 --bootstrap-server localhost:9092
+
+# Start reading all messages from the beginning
+sh /path/to/directory/kafka-console-consumer.sh --topic test-topic2 --from-beginning --bootstrap-server localhost:9092
+
+# Consume key/value pair messages
+sh /path/to/directory/kafka-console-consumer.sh --topic test-topic2 --from-beginning --property "print.key=true" --property "print.value=true" --bootstrap-server localhost:9092
 ```
