@@ -1,4 +1,4 @@
-package com.mtncloudservices.ws.ProductsMicroservice;
+package com.mtncloudservices.ws.products;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

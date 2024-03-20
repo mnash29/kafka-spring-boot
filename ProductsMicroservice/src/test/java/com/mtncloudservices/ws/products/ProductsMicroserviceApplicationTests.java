@@ -1,4 +1,4 @@
-package com.mtncloudservices.ws.ProductsMicroservice;
+package com.mtncloudservices.ws.products;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
